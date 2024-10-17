@@ -1,0 +1,31 @@
+version: '3'
+services:
+  fastapi:
+    #container_name: fastapi
+    build:
+      context: .
+      dockerfile: ./fastapi-backend/Dockerfile.gpu    
+    ports:
+      - 8000:8000
+    volumes:
+      - fastapi-vectordb:/vectordb
+      - insightface-model:/insightface
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]  
+  redis:
+    image: redis
+    #container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:
+  insightface-model:
+  fastapi-vectordb:

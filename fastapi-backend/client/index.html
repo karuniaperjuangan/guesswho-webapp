@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Detection Client</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .result-container { margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .loader { font-size: 16px; color: #555; }
+        #media { max-width: 300px; }
+    </style>
+</head>
+<body>
+    <h1>Face Detection Client</h1>
+    <div id="media"></div>
+    <h2>Upload an Image or Video</h2>
+    <input type="file" id="fileInput" accept="image/*,video/*" />
+    <button onclick="uploadFile()">Upload</button>
+
+    <div id="status" class="loader"></div>
+    <div id="result" class="result-container"></div>
+    <div id="result-pca" class="result-container"></div>
+
+    <script>
+        async function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Please select a file first!");
+                return;
+            }
+
+            const endpoint = file.type.startsWith("image/") ? "/face/image" : "/face/video";
+            // show media
+            const mediaContainer = document.getElementById('media');
+            mediaContainer.innerHTML = ""; // Clear previous media
+
+            if (file.type.startsWith("image/")) {
+                const img = document.createElement("img");
+                img.src = URL.createObjectURL(file);
+                img.style.maxWidth = "100%";
+                mediaContainer.appendChild(img);
+            } else if (file.type.startsWith("video/")) {
+                const video = document.createElement("video");
+                video.src = URL.createObjectURL(file);
+                video.controls = true;
+                video.style.maxWidth = "100%";
+                mediaContainer.appendChild(video);
+            }
+            const formData = new FormData();
+            formData.append("file", file);
+
+            document.getElementById("status").innerText = "Uploading and processing...";
+            document.getElementById("result").innerHTML = "";
+
+            try {
+                // Send file to server
+                const response = await fetch(endpoint, {
+                    method: "POST",
+                    body: formData
+                });
+                const { task_id } = await response.json();
+
+                // Poll for task completion
+                pollStatus(task_id);
+            } catch (error) {
+                document.getElementById("status").innerText = "Error uploading file!";
+                console.error("Error:", error);
+            }
+        }
+
+        async function pollStatus(taskId) {
+            try {
+                const statusResponse = await fetch(`/task/status/${taskId}`);
+                const data = await statusResponse.json();
+
+                if (data.status === "completed") {
+                    document.getElementById("status").innerText = "Processing completed!";
+                    displayResults(data.result);
+                } else {
+                    // Continue polling if still processing
+                    document.getElementById("status").innerText = data.status
+                    setTimeout(() => pollStatus(taskId), 500);
+                }
+            } catch (error) {
+                document.getElementById("status").innerText = "Error checking task status!";
+                console.error("Error:", error);
+            }
+        }
+
+        function displayResults(result) {
+            const resultContainer = document.getElementById("result");
+            resultContainer.innerHTML = ""; // Clear previous results
+
+            const table = document.createElement("table");
+            const thead = document.createElement("thead");
+            const tbody = document.createElement("tbody");
+
+            const headerRow = document.createElement("tr");
+            ["Original Image", "Face Image", "Name", "Description", "Details"].forEach(text => {
+                const th = document.createElement("th");
+                th.innerText = text;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            if (result.faces_data) { // Case for video results
+                result.faces_data.forEach(face => renderFaceRow(face, tbody));
+                const plotImg = document.createElement("img");
+                const resultPCAContainer = document.getElementById("result-pca");
+                resultPCAContainer.innerHTML = ''
+                plotImg.src = result.plot_pca;
+                plotImg.alt = "PCA Plot";
+                plotImg.style.width = "100px";
+                resultPCAContainer.appendChild(plotImg);
+            } else { // Case for image results
+                result.forEach(face => renderFaceRow(face, tbody));
+            }
+
+            table.appendChild(tbody);
+            resultContainer.appendChild(table);
+            
+        }
+
+        function renderFaceRow(face, tbody) {
+            const row = document.createElement("tr");
+
+            // Original image
+            const originalImgCell = document.createElement("td");
+            const originalImg = document.createElement("img");
+            originalImg.src = face.b64_face;
+            originalImg.style.width = "100px";
+            originalImgCell.appendChild(originalImg);
+            row.appendChild(originalImgCell);
+
+            // Face image
+            const faceImgCell = document.createElement("td");
+            const faceImg = document.createElement("img");
+            faceImg.src = face.img_url;
+            faceImg.style.width = "100px";
+            faceImgCell.appendChild(faceImg);
+            row.appendChild(faceImgCell);
+
+            // Name
+            const nameCell = document.createElement("td");
+            nameCell.innerText = face.name || "Unknown";
+            row.appendChild(nameCell);
+
+            // Description
+            const descriptionCell = document.createElement("td");
+            descriptionCell.innerText = face.description || "No description available.";
+            row.appendChild(descriptionCell);
+
+            // Detail link
+            const detailCell = document.createElement("td");
+            if (face.detail_url) {
+                const detailLink = document.createElement("a");
+                detailLink.href = face.detail_url;
+                detailLink.innerText = "More details";
+                detailLink.target = "_blank";
+                detailCell.appendChild(detailLink);
+            }
+            row.appendChild(detailCell);
+
+            tbody.appendChild(row);
+        }
+    </script>
+</body>
+</html>
