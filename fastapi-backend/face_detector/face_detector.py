@@ -54,6 +54,12 @@ def get_face_image(img: Image.Image, max_num: int = 0,task_id=None):
                 'detail_url': 'https://www.google.com',
             }
         cropped_face = img[bbox[1]:bbox[3], bbox[0]:bbox[2]]
+        result_data['bbox'] ={
+            'x_min': bbox[0] / img.shape[1],
+            'y_min': bbox[1] / img.shape[0],
+            'x_max': bbox[2] / img.shape[1],
+            'y_max': bbox[3] / img.shape[0],
+        }
         #convert to html b64 image string
         b64_face = cv2_to_base64(cropped_face)
         faces_data.append({
@@ -307,6 +313,12 @@ def generate_faces_data(clip, fps, list_all_character_bounding_box_dict, cluster
                                        output_fields=['name', 'img_url', 'description', 'detail_url', 'data_source', 'img_path'],
                                        limit=10,)
         result_data = get_result_data(results)
+        result_data['bbox'] ={
+            'x_min': box_frame[0] / clip.size[0],
+            'y_min': box_frame[1] / clip.size[1],
+            'x_max': box_frame[2] / clip.size[0],
+            'y_max': box_frame[3] / clip.size[1],
+        }
         frame = clip.get_frame(start_frame / fps)
         frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
         cropped_face = frame[box_frame[1]:box_frame[3], box_frame[0]:box_frame[2]]

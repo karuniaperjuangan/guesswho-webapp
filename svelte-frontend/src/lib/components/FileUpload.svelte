@@ -1,6 +1,6 @@
 <script lang="ts">
     
-    import { media } from '../../store';
+    import { media,result } from '../../store';
  
     let file: HTMLInputElement | null = null;
 
@@ -16,6 +16,7 @@
             return;
         }
         media.set(input.files[0]);
+        result.set([]);
     }
 </script>
 

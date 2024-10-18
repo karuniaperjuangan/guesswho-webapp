@@ -68,34 +68,28 @@
 <div class=" w-full text-center">
     <h1>Face Detection Client</h1>
 
-    <div class="grid grid-cols-2 gap-4 w-full justify-around px-8">
+    <div class="w-full justify-around px-8">
         <div class=" w-full">
             <div>
                 
                 {#if $media}
-                <div class=" max-h-[512px] aspect-video bg-neutral">
+                <div class=" mx-auto max-h-[384px] h-fit aspect-video bg-neutral overflow-hidden">
                     <MediaPreview />
                 </div>
 
                     <p class=" text-center">Selected file: {$media.name}</p>
                 {:else}
-                    <div class=" bg-neutral aspect-video w-full text-white p-2 my-5 flex flex-col justify-center">
+                    <div class=" mx-auto bg-neutral max-h-[384px] aspect-video text-white p-2 my-5 flex flex-col justify-center">
                         <p class=" text-center my-auto">No media file selected!</p>
                     </div>
                 {/if}
             </div>
             
-            <div class=" flex w-full justify-around">
+            <div class=" flex w-full justify-around max-w-4xl mx-auto">
                 <div class="w-1/4">
                 <FileUpload />
                 </div>
-                {#if $media}
-                    <button on:click={uploadFile} class=" btn btn-primary w-1/4"
-                        >Process File</button
-                    >
-                {:else}
-                    <div />
-                {/if}
+                    <button on:click={uploadFile} class={` btn btn-primary w-1/4 ${!$media ? "cursor-not-allowed disabled" : ""}`} disabled={!$media}>Process File</button>
             </div>
         </div>
         <div class=" w-full"><ResultTable /></div>
