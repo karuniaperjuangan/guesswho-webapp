@@ -16,7 +16,9 @@ services:
       resources:
         reservations:
           devices:
-            - capabilities: [gpu]  
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
   redis:
     image: redis
     #container_name: redis
