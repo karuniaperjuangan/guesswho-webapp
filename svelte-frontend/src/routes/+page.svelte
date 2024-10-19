@@ -12,7 +12,7 @@
             return;
         }
 
-        status.set("Uploading and processing...");
+        status.set("Uploading file...");
         result.set([]);
 
         const endpoint = $media
@@ -65,15 +65,19 @@
     }
 </script>
 
-<div class=" w-full text-center">
-    <h1>Face Detection Client</h1>
+<div class=" w-full text-center px-8 max-w-3xl mx-auto">
+    <h1>Guess Who? : Identify Your Favorite Idol</h1>
 
-    <div class="w-full justify-around px-8">
+    <div class="w-full justify-around">
         <div class=" w-full">
-            <div> 
+            <div class="relative">
+                {#if !($status.includes("completed") || $status === "")}
+                     <p class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-white">
+                {$status}
+                </p>
+                {/if}
                 {#if $media}      
                     <MediaPreview />
-                    <p class=" text-center">Selected file: {$media.name}</p>
                 {:else}
                     <div class=" mx-auto bg-neutral max-h-[384px] aspect-video text-white p-2 my-5 flex flex-col justify-center">
                         <p class=" text-center my-auto">No media file selected!</p>
@@ -81,16 +85,13 @@
                 {/if}
             </div>
             
-            <div class=" flex w-full justify-around max-w-4xl mx-auto">
+            <div class=" flex w-full justify-around max-w-4xl mx-auto py-8">
                 <div class="w-1/4">
                 <FileUpload />
                 </div>
                     <button on:click={uploadFile} class={` btn btn-primary w-1/4 ${!$media ? "cursor-not-allowed disabled" : ""}`} disabled={!$media}>Process File</button>
             </div>
         </div>
-        <div class=" w-full"><ResultTable /></div>
-    </div>
-
-    <p class=" text-center w-full">{$status}</p>
-    
+        <div class="w-full"><ResultTable /></div>
+    </div>    
 </div>
