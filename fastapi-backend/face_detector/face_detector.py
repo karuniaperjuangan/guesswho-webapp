@@ -19,7 +19,7 @@ from database.redis import redis_client
 
 matplotlib.use('Agg')
 
-OPTICS_MIN_SAMPLES = 0.05
+OPTICS_MIN_SAMPLES = 0.02
 NUM_DETECTION_FRAME_PER_SECOND = 1
 
 # prepare 'antelopev2' under ./models
@@ -280,7 +280,7 @@ def perform_clustering(list_all_character_bounding_box_dict):
     pca = PCA(n_components=2)
     X_pca = pca.fit_transform(X)
     X_pca = StandardScaler().fit_transform(X_pca)
-    db = OPTICS(min_samples=OPTICS_MIN_SAMPLES).fit(X_pca)
+    db = OPTICS(min_cluster_size=OPTICS_MIN_SAMPLES).fit(X_pca)
     clusters = db.labels_
     print(clusters)
     for character_bounding_box, cluster_id in zip(list_all_character_bounding_box_dict, clusters):
