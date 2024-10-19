@@ -70,13 +70,9 @@
 
     <div class="w-full justify-around px-8">
         <div class=" w-full">
-            <div>
-                
-                {#if $media}
-                <div class=" mx-auto max-h-[384px] h-fit aspect-video bg-neutral overflow-hidden">
+            <div> 
+                {#if $media}      
                     <MediaPreview />
-                </div>
-
                     <p class=" text-center">Selected file: {$media.name}</p>
                 {:else}
                     <div class=" mx-auto bg-neutral max-h-[384px] aspect-video text-white p-2 my-5 flex flex-col justify-center">
