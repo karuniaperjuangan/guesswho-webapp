@@ -71,7 +71,9 @@
                         <th>Original Image</th>
                         <th>Face Image</th>
                         <th>Name</th>
+                        <!--
                         <th>Description</th>
+                        -->
                         <th>Details</th>
                     </tr>
                 </thead>
@@ -81,7 +83,9 @@
                         <td><img src={face.b64_face} alt="Original" class="w-full max-w-36" /></td>
                         <td><img src={face.img_url} alt="Face" class="w-full max-w-36" /></td>
                         <td>{face.name}</td>
+                        <!--
                         <td>{face.description}</td>
+                        -->
                         <td><a href={face.detail_url} target="_blank" class="link link-primary">More Information</a></td>
                     </tr>
                     {/each}

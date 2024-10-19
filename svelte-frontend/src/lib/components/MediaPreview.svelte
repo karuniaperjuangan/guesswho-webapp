@@ -33,7 +33,7 @@
         }
     }
 </script>
-<div class=" mx-auto max-h-[384px] h-fit aspect-video bg-neutral overflow-hidden">
+<div class=" mx-auto max-h-[384px] h-fit w-full bg-neutral overflow-hidden">
 <div class="media-preview h-fit w-fit mx-auto">
     {#if previewUrl}
     {#if $media}
