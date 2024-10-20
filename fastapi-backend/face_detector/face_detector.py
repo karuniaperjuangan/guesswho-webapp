@@ -19,7 +19,7 @@ from database.redis import redis_client
 
 matplotlib.use('Agg')
 
-OPTICS_MIN_SAMPLES = 0.02
+OPTICS_MIN_SAMPLES = 0.04
 NUM_DETECTION_FRAME_PER_SECOND = 1
 
 # prepare 'antelopev2' under ./models
