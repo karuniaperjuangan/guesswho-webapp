@@ -70,7 +70,7 @@
         </div>
         
         {:else if $media.type.startsWith("video/")}
-            <video src={previewUrl} controls class="w-full mx-auto">
+            <video src={previewUrl} controls class="h-full max-h-[384px] mx-auto">
                 <track kind="captions" src="captions.vtt" srclang="en" label="English">
             </video>
         {/if}

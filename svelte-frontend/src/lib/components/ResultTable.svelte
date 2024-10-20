@@ -9,9 +9,7 @@
     let pageSize = 5; // Number of items per page
     let totalPages = 1;
 
-    $: if (result) {
-        totalPages = Math.ceil($result.length / pageSize);
-    }
+
 
     // Function to change page
     function changePage(newPage: number) {
@@ -27,8 +25,20 @@
         }
     }
 
+    let searchKeyword = "";
+
+    $: filteredResults = $result.filter((face: Face) => {
+        if (searchKeyword === "") {
+            return true;
+        }
+        return face.name.toLowerCase().includes(searchKeyword.toLowerCase());
+    });
+
     // Get paginated results
-    $: paginatedResults = $result.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+    $: paginatedResults = filteredResults.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+    $: if (paginatedResults) {
+        totalPages = Math.ceil(filteredResults.length / pageSize);
+    }
 </script>
 {#if $activeFace}
 <ModalCharacter activeFace={$activeFace} />
@@ -64,6 +74,11 @@
        />
     <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6 !col-span-2">
         <div class="result-table w-full">
+            <input
+                type="text"
+                class="input input-bordered w-full mb-4"
+                placeholder="Search by name"
+                bind:value={searchKeyword}/>
             {#if result && $result.length > 0}
             <table class="table">
                 <thead>
@@ -79,9 +94,9 @@
                 </thead>
                 <tbody>
                     {#each paginatedResults as face}
-                    <tr class="table-row hover:bg-slate-200 transition-all min-h-36">
-                        <td><img src={face.b64_face} alt="Original" class="w-full max-w-36" /></td>
-                        <td><img src={face.img_url} alt="Face" class="w-full max-w-36" /></td>
+                    <tr class="table-row hover:bg-slate-200 transition-all min-h-24">
+                        <td><img src={face.b64_face} alt="Original" class="w-full mx-auto max-w-24 aspect-square object-cover" /></td>
+                        <td><img src={face.img_url} alt="Face" class="w-full mx-auto max-w-24 aspect-square object-cover" /></td>
                         <td>{face.name}</td>
                         <!--
                         <td>{face.description}</td>

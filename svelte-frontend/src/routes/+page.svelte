@@ -3,6 +3,7 @@
     import FileUpload from "../lib/components/FileUpload.svelte";
     import MediaPreview from "../lib/components/MediaPreview.svelte";
     import ResultTable from "../lib/components/ResultTable.svelte";
+    import type { Face } from "$lib/models/face";
 
     const URL = "http://0.0.0.0:8000";
     async function uploadFile() {
@@ -54,6 +55,11 @@
                 } else {
                     result.set(data.result.faces_data);
                 }
+                // deduplicate the result based on name
+                const uniqueResult = Array.from(new Set($result.map((a) => a.name))).map((name) => {
+                    return $result.find((a) => a.name === name);
+                });
+                result.set(uniqueResult.filter((face) => face !== undefined) as Face[]);
             } else {
                 status.set(data.status);
                 setTimeout(() => pollStatus(taskId), 2000);
@@ -68,7 +74,7 @@
 <div class=" w-full text-center px-8 mx-auto">
     <h1>Guess Who? : Identify Your Favorite Idol</h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div class=" w-full">
             <div class="relative">
                 {#if !($status.includes("completed") || $status === "")}
