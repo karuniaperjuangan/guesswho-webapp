@@ -12,7 +12,15 @@ services:
       - insightface-model:/insightface
     depends_on:
       - redis
-
+  svelte:
+    #container_name: svelte
+    build:
+      context: ./svelte-frontend
+      dockerfile: ./svelte-frontend/Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - fastapi
   redis:
     image: redis
     #container_name: redis

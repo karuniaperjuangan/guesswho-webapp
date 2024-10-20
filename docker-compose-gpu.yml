@@ -19,6 +19,15 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+  svelte:
+    #container_name: svelte
+    build:
+      context: ./svelte-frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - fastapi
   redis:
     image: redis
     #container_name: redis
