@@ -58,7 +58,7 @@
           <a class="btn btn-ghost text-xl" href="/#">GuessWho?</a>
         </div>
 
-        <SidebarResultHistoryList></SidebarResultHistoryList>
+        <SidebarResultHistoryList />
       </ul>
     </div>
   </div>
