@@ -79,7 +79,7 @@
     <p class=" text-justify mx-auto w-fit py-4">
         Upload a photo or video of your favorite idols and let our AI models <span class="font-bold">guess who</span> they are! <br />
         Our AI models can identify 12,000+ famous faces from <span class="font-bold">MyDramaList</span> and <span class="font-bold">Kpopping</span> image databases. <br/>
-        To save the reults, please sign in with your account.
+        To save the results, please sign in with your account.
     </p>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div class=" w-full">
