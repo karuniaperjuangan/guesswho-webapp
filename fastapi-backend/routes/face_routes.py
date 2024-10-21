@@ -21,6 +21,7 @@ def process_face_image(task_id, file_path):
         redis_client.set(task_id, json.dumps({"status": "failed", "error": str(e)}))
     # Remove the file after processing
     finally:
+        redis_client.expire(task_id, 300)  # expire in 5 minutes
         os.remove(file_path)
 
 # Endpoint to upload an image for face detection
@@ -51,6 +52,7 @@ def process_face_video(task_id, video_path):
     except Exception as e:
         redis_client.set(task_id, json.dumps({"status": "failed", "error": str(e)}))
     finally:
+        redis_client.expire(task_id, 300)  # expire in 5 minutes
         os.remove(video_path)
 
 # Endpoint to upload a video for face detection
