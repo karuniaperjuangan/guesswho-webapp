@@ -8,7 +8,7 @@ import aiofiles
 import os
 import json
 from database.redis import redis_client
-from utils import generate_task_id
+from utils.generate_task_id import generate_task_id
 router = APIRouter()
 
 # Background task for face detection on image
