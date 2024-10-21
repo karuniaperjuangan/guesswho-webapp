@@ -2,7 +2,7 @@
     import { media, status, result } from "../store";
     import FileUpload from "../lib/components/FileUpload.svelte";
     import MediaPreview from "../lib/components/MediaPreview.svelte";
-    import ResultTable from "../lib/components/ResultTable.svelte";
+    import Result from "../lib/components/Result.svelte";
     import type { Face } from "$lib/models/face";
 
     const URL = "http://0.0.0.0:8000";
@@ -72,8 +72,15 @@
 </script>
 
 <div class=" w-full text-center px-8 mx-auto">
-    <h1>Guess Who? : Identify Your Favorite Idol</h1>
+    <h1
+    class="text-2xl font-bold mb-6"
+    >Guess Who? : Identify Your Favorite Idol</h1>
 
+    <p class=" text-justify mx-auto w-fit py-4">
+        Upload a photo or video of your favorite idols and let our AI models <span class="font-bold">guess who</span> they are! <br />
+        Our AI models can identify 12,000+ famous faces from <span class="font-bold">MyDramaList</span> and <span class="font-bold">Kpopping</span> image databases. <br/>
+        To save the reults, please sign in with your account.
+    </p>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div class=" w-full">
             <div class="relative">
@@ -99,6 +106,6 @@
             </div>
         </div>
 
-        <div class="w-full"><ResultTable /></div>
+        <div class="w-full"><Result /></div>
     </div>    
 </div>
