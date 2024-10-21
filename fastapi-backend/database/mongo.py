@@ -14,7 +14,7 @@ import dotenv
 
 dotenv.load_dotenv()
 
-def get_user_colection():
+def get_user_collection():
     # Connect to MongoDB
     client = MongoClient(os.getenv('MONGO_URI'))
 
@@ -22,7 +22,9 @@ def get_user_colection():
 
     return db['users']
 
-async def register_user(user: UserCreate, user_collection: Annotated[Collection, Depends(get_user_colection)]):
+
+
+async def register_user(user: UserCreate, user_collection: Annotated[Collection, Depends(get_user_collection)]):
     """
     Registers a new user in the database.
 
@@ -40,7 +42,7 @@ async def register_user(user: UserCreate, user_collection: Annotated[Collection,
     user_collection.insert_one(user_dict)
     return User(**user_dict)
 
-def authenticate_user(username: str, password: str, user_collection: Annotated[Collection, Depends(get_user_colection)]):
+def authenticate_user(username: str, password: str, user_collection: Annotated[Collection, Depends(get_user_collection)]):
     """
     Authenticates a user in the database.
 
@@ -61,7 +63,7 @@ def authenticate_user(username: str, password: str, user_collection: Annotated[C
         return False
     return User(**user)
 
-async def get_current_user(token:  Annotated[str, Depends(oauth2_scheme)], user_collection: Annotated[Collection, Depends(get_user_colection)]):
+async def get_current_user(token:  Annotated[str, Depends(oauth2_scheme)], user_collection: Annotated[Collection, Depends(get_user_collection)]):
     """
     Authenticates a user in the database.
 

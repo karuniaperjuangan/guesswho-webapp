@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from auth.auth import create_access_token, get_password_hash, verify_password
-from database.mongo import authenticate_user, get_user_colection, get_current_user
+from database.mongo import authenticate_user, get_user_collection, get_current_user
 from pymongo.collection import Collection
 from models.user import User, UserCreate, Token
 router= APIRouter()
@@ -13,7 +13,7 @@ router= APIRouter()
 @router.post("/token")
 async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
-    collection: Annotated[dict, Depends(get_user_colection)]
+    collection: Annotated[dict, Depends(get_user_collection)]
 ) -> Token:
     user = authenticate_user(form_data.username, form_data.password,collection)
     if not user:
@@ -29,7 +29,7 @@ async def login_for_access_token(
     return Token(access_token=access_token, token_type="bearer")
 
 @router.post("/register", response_model=User)
-async def register_user(user: UserCreate, collection: Annotated[Collection, Depends(get_user_colection)]):
+async def register_user(user: UserCreate, collection: Annotated[Collection, Depends(get_user_collection)]):
     """
     Registers a new user in the database.
 

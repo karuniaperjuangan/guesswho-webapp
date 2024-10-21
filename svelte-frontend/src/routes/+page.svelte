@@ -74,10 +74,10 @@
 <div class=" w-full text-center px-8 mx-auto">
     <h1
     class="text-2xl font-bold mb-6"
-    >Guess Who? : Identify Your Favorite Idol</h1>
+    >Guess Who? : Identify Your Favorite Celebs</h1>
 
     <p class=" text-justify mx-auto w-fit py-4">
-        Upload a photo or video of your favorite idols and let our AI models <span class="font-bold">guess who</span> they are! <br />
+        Upload a photo or video of your favorite celebs and let our AI models <span class="font-bold">guess who</span> they are! <br />
         Our AI models can identify 12,000+ famous faces from <span class="font-bold">MyDramaList</span> and <span class="font-bold">Kpopping</span> image databases. <br/>
         To save the results, please sign in with your account.
     </p>
