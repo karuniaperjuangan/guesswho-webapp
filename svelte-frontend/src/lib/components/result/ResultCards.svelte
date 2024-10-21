@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Face } from "$lib/models/face";
-    import { result, activeFace } from "../../../store";
+    import { result, activeFace } from "../../store";
 
     async function showModal(face:Face) {
         const modal = document.getElementById('modal-character');

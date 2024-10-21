@@ -5,3 +5,4 @@ export const media = writable<File|null>(null);
 export const status = writable('');
 export const result = writable<Face[]>([]);
 export const activeFace = writable<Face|null>(null);
+export const accessToken = writable<string|null>(null); // Store the access token here

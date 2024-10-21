@@ -1,7 +1,6 @@
 <script lang="ts">
-    
-    import { media,result } from '../../store';
- 
+    import { media, result } from "../store";
+
     let file: HTMLInputElement | null = null;
 
     function handleUpload() {
@@ -21,7 +20,15 @@
 </script>
 
 <div class="upload-container">
-    <input id="file-input" on:change={handleFileChange} class=" hidden" type="file" bind:this={file} accept="image/*,video/*" />
-    <button on:click={handleUpload} class=" btn btn-primary w-full">Upload</button>
+    <input
+        id="file-input"
+        on:change={handleFileChange}
+        class=" hidden"
+        type="file"
+        bind:this={file}
+        accept="image/*,video/*"
+    />
+    <button on:click={handleUpload} class=" btn btn-primary w-full"
+        >Upload</button
+    >
 </div>
-

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Face } from "$lib/models/face";
 
-import { result } from "../../../store";
+import { result } from "../../store";
 
 // Variables for pagination
 let currentPage = 1;

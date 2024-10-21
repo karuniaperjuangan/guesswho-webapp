@@ -9,7 +9,7 @@ export interface Face {
     bbox: Bbox;
 }
 
-export interface Bbox{
+export interface Bbox {
     x_min: number; //ratio of x_min to image width
     y_min: number; //ratio of y_min to image height
     x_max: number; //ratio of x_max to image width
