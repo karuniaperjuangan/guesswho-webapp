@@ -16,3 +16,6 @@ matplotlib
 moviepy
 scikit-learn
 python-dotenv
+pyjwt
+passlib
+pymongo

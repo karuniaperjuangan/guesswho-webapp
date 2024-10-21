@@ -28,8 +28,16 @@ services:
       - "6379:6379"
     volumes:
       - redis-data:/data
+  mongo:
+  #container_name: mongo
+    image: mongo:7.0.4-jammy
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
 
 volumes:
   redis-data:
+  mongodb-data:
   insightface-model:
   fastapi-vectordb:

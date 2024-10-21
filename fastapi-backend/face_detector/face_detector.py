@@ -3,7 +3,7 @@ from tqdm import tqdm
 import cv2
 import numpy as np
 from PIL import Image
-from database.db import milvus_client
+from database.vector_db import milvus_client
 from utils.cv2_to_base64 import cv2_to_base64
 from tqdm import tqdm
 import matplotlib.pyplot as plt
