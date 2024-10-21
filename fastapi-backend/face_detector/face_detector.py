@@ -49,7 +49,8 @@ def get_face_image(img: Image.Image, max_num: int = 0,task_id=None):
         else:
             result_data = {
                 'name': 'Unknown',
-                'img_url': 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
+                # use placeholder image
+                'img_url':  'https://png.pngtree.com/png-vector/20220622/ourmid/pngtree-unknown-user-question-mark-about-png-image_5169297.png',
                 'description': 'Unknown',
                 'detail_url': 'https://www.google.com',
             }
@@ -365,7 +366,7 @@ def get_result_data(results):
         print("No similar face found")
         return {
             'name': 'Unknown',
-            'img_url': 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
+            'img_url': 'https://png.pngtree.com/png-vector/20220622/ourmid/pngtree-unknown-user-question-mark-about-png-image_5169297.png',
             'description': 'Unknown',
             'detail_url': 'https://www.google.com',
         }
