@@ -22,6 +22,13 @@ def get_user_collection():
 
     return db['users']
 
+def get_result_history_collection():
+    # Connect to MongoDB
+    client = MongoClient(os.getenv('MONGO_URI'))
+
+    db = client['guesswho']
+
+    return db['result_history']
 
 
 async def register_user(user: UserCreate, user_collection: Annotated[Collection, Depends(get_user_collection)]):

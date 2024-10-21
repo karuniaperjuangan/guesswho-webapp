@@ -53,6 +53,8 @@ def get_face_image(img: Image.Image, max_num: int = 0,task_id=None):
                 'img_url':  'https://png.pngtree.com/png-vector/20220622/ourmid/pngtree-unknown-user-question-mark-about-png-image_5169297.png',
                 'description': 'Unknown',
                 'detail_url': 'https://www.google.com',
+                'data_source':'',
+                'img_path': '' 
             }
         cropped_face = img[max(0, bbox[1]):min(bbox[3], img.shape[0]), max(0, bbox[0]):min(bbox[2], img.shape[1])]
         result_data['bbox'] ={
@@ -369,6 +371,8 @@ def get_result_data(results):
             'img_url': 'https://png.pngtree.com/png-vector/20220622/ourmid/pngtree-unknown-user-question-mark-about-png-image_5169297.png',
             'description': 'Unknown',
             'detail_url': 'https://www.google.com',
+            'data_source':'',
+            'img_path': '' 
         }
 
 def generate_json(faces_data, plot_pca, X_pca, clusters):

@@ -8,6 +8,8 @@ from database.redis import redis_client
 import dotenv
 from routes.face_routes import router as face_router
 from routes.authetication_routes import router as auth_router
+from routes.result_history_routes import router as result_history_router
+
 dotenv.load_dotenv()
 
 # Initialize FastAPI app and Redis client
@@ -24,6 +26,8 @@ app.add_middleware(
 
 app.include_router(face_router)
 app.include_router(auth_router)
+app.include_router(result_history_router)
+
 @app.get("/")
 async def read_root():
     return {"Hello": "World"}

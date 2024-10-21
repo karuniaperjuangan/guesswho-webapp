@@ -8,7 +8,6 @@ class Bbox(BaseModel):
     x_max: float
     y_max: float
 
-
 class Face(BaseModel):
     b64_face: str
     name: str
@@ -19,11 +18,19 @@ class Face(BaseModel):
     img_path: str
     bbox: Bbox
 
-
 class RecognitionResult(BaseModel):
     result: List[Face]
 
-class RecognitionResultHistory(BaseModel):
+class ResultHistory(BaseModel):
     username : str
-    name : str
+    history_name : str
+    b64_media : str
     recognition_result : RecognitionResult
+
+class ResultHistoryRequest(BaseModel):
+    history_name : str
+
+class CreateResultHistoryRequest(BaseModel):
+    history_name : str
+    recognition_result : RecognitionResult
+    b64_media : str
