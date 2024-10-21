@@ -4,8 +4,10 @@
     import MediaPreview from "../lib/components/MediaPreview.svelte";
     import Result from "../lib/components/Result.svelte";
     import type { Face } from "$lib/models/face";
-
-    const URL = "http://0.0.0.0:8000";
+    import {
+		PUBLIC_BASE_API_URL
+	} from '$env/static/public'
+    const URL = PUBLIC_BASE_API_URL;
     async function uploadFile() {
         if (!$media) {
             alert("Please select a file first!");
