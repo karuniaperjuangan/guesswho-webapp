@@ -4,13 +4,25 @@ GuessWho? is an application that identifies the faces of Korean idols and actors
 
 ## Tech Stack
 
-- **Backend**: FastAPI
-- **Frontend**: Svelte
-- **Database**: MongoDB
-- **Vector Database**: Milvus
-- **Task Qeueuing**: Redis
-- **Face Recognition Model**: InsightFace
-- **Containerization**: Docker, Docker Compose
+<div syle="display: flex; justify-content: space-around;">
+<img src="https://cdn.worldvectorlogo.com/logos/fastapi.svg" alt="FastAPI" style="height: 50px;"/>&nbsp;
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Svelte_Logo.svg/399px-Svelte_Logo.svg.png" alt="SvelteKit" style="height: 50px;"/>
+<img src="https://img.daisyui.com/images/daisyui-logo/daisyui-logotype.svg" alt="DaisyUI" style="height: 50px;"/>
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/MongoDB_Logo.png/799px-MongoDB_Logo.png" alt="MongoDB" style="height: 50px;"/>
+<img src="https://github.com/milvus-io/artwork/raw/master/horizontal/color/milvus-horizontal-color.png" alt="Milvus" style="height: 50px;"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Logo-redis.svg/1024px-Logo-redis.svg.png" alt="Redis" style="height: 50px;"/>
+<img src="https://insightface.ai/assets/img/custom/logo3.jpg" alt="Insightface" style="height: 50px;"/>
+</div>
+
+## Screenshot
+
+<div style="display: flex; justify-content: space-around;">
+
+![](docs/ss1.png)
+
+![](docs/ss2.png)
+</div>
 
 ## Setup Instructions
 
