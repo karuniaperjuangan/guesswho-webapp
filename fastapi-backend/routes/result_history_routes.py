@@ -12,6 +12,8 @@ def get_all_result_history(user: Annotated[User, Depends(get_current_user)], res
         results = list(result_history_collection.find({"username": user.username}))
         for item in results:
             item["_id"] = str(item["_id"])
+        #only take history_name attribute
+        results = [{ "history_name" : item["history_name"]} for item in results]
         return results
     except Exception as e:
         if isinstance(e, HTTPException):
