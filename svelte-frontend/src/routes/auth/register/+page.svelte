@@ -2,6 +2,7 @@
   import { goto } from "$app/navigation";
 
   import { PUBLIC_BASE_API_URL } from "$env/static/public";
+  import { toast } from "@zerodevx/svelte-toast";
   let username = "";
   let password = "";
 
@@ -14,10 +15,11 @@
       body: JSON.stringify({ username: username, password: password }),
     });
     if (response.ok) {
-      alert("Registration successful!");
-      await goto("/auth/login");
+      toast.push('Registration successful!', { classes: ['bg-success'] })
+      goto("/auth/login");
     } else {
-      alert("Registration failed." + (await response.json()).detail);
+      //alert("Registration failed." + (await response.json()).detail);
+      toast.push((await response.json()).detail, { classes: ['bg-error'] })
     }
   }
 </script>

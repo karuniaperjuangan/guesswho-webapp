@@ -27,7 +27,6 @@ def get_result_history_by_name(user: Annotated[User, Depends(get_current_user)],
         result = result_history_collection.find_one({"username": user.username, "history_name": history_name})
         if not result:
             raise HTTPException(status_code=404, detail="Result history not found")
-        print(result)
         result["_id"] = str(result["_id"])
         return result
     except Exception as e:
@@ -40,6 +39,7 @@ def get_result_history_by_name(user: Annotated[User, Depends(get_current_user)],
 @router.post("/user/history")
 def create_result_history(user: Annotated[User, Depends(get_current_user)], request: CreateResultHistoryRequest, result_history_collection: Annotated[Collection, Depends(get_result_history_collection)]):
     try:
+        print(user)
         if result_history_collection.find_one({"username": user.username, "history_name": request.history_name}):
             raise HTTPException(status_code=409, detail="Result history already exists")
         recognition_result = request.recognition_result
@@ -54,7 +54,6 @@ def create_result_history(user: Annotated[User, Depends(get_current_user)], requ
         result_history_collection.insert_one(new_document)
         new_document["_id"] = str(new_document["_id"])
         # Return the created document as a response
-        print(new_document)
         return new_document
     except Exception as e:
         if isinstance(e, HTTPException):

@@ -2,6 +2,7 @@
   import { PUBLIC_BASE_API_URL } from "$env/static/public";
   import { accessToken } from "$lib/store";
   import { goto } from "$app/navigation";
+  import { SvelteToast, toast } from '@zerodevx/svelte-toast'
   let username = "";
   let password = "";
 
@@ -19,10 +20,15 @@
       }),
     });
     const data = await response.json();
+    if(response.ok) {
     if (data.access_token) {
       accessToken.set(data.access_token);
       localStorage.setItem("access_token", data.access_token);
       await goto("/");
+      toast.push('Login successful!', { classes: ['bg-success'] })
+    }}
+    else {
+      toast.push('Invalid username or password', { classes: ['bg-error'] });
     }
   }
 </script>

@@ -34,7 +34,10 @@
         </label>
     </div>
     <div class="flex-1">
-        <a class="btn btn-ghost text-xl" href="/#">GuessWho?</a>
+
+        <a class="btn btn-ghost" href="/#">
+            <p class=" text-base-content text-xl">GuessWho?</p>
+        </a>
     </div>
     <div class="flex-none">
         <div class="dropdown dropdown-end">

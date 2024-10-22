@@ -5,7 +5,7 @@
   import { accessToken, result, media } from "$lib/store";
   import { onMount } from "svelte";
   import { PUBLIC_BASE_API_URL } from "$env/static/public";
-
+  import { SvelteToast } from '@zerodevx/svelte-toast'// toast
   onMount(async () => {
     $accessToken = localStorage.getItem("access_token");
     // try to access /user in api with bearer access token
@@ -34,6 +34,7 @@
 </script>
 
 <div class=" flex flex-col h-full min-h-screen">
+  <SvelteToast/>
   <Navbar />
 
   <div class="drawer h-full flex-1">
@@ -55,7 +56,9 @@
             alt="Placeholder"
             class="h-8 aspect-square object-cover"
           />
-          <a class="btn btn-ghost text-xl" href="/#">GuessWho?</a>
+          <a class="btn btn-ghost" href="/#">
+            <p class=" text-base-content text-xl">GuessWho?</p>
+        </a>
         </div>
 
         <SidebarResultHistoryList />

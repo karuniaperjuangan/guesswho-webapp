@@ -7,7 +7,7 @@ import jwt
 from passlib.context import CryptContext
 from models.user import UserCreate, User
 from typing import Annotated
-from fastapi import Depends
+from fastapi import Depends, HTTPException
 from auth.auth import *
 from jwt.exceptions import InvalidTokenError
 import dotenv
@@ -87,10 +87,10 @@ async def get_current_user(token:  Annotated[str, Depends(oauth2_scheme)], user_
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
         if username is None:
-            return False
+            raise HTTPException(status_code=401, detail="Invalid authentication credentials")
         user = user_collection.find_one({'username': username})
         if user is None:
-            return False
+            return None
         return User(**user)
     except InvalidTokenError:
         return False
