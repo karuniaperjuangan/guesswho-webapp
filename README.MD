@@ -1,5 +1,8 @@
-# GuessWho?
-
+<div align="center">
+<h1>
+GuessWho?
+</h1>
+</div>
 GuessWho? is an application that identifies the faces of Korean idols and actors from an image or a video using a face recognition model connected vector databases containing 12,000+ faces from Kpopping and MyDramaList image database.
 
 ## Tech Stack
