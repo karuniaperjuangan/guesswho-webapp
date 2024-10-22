@@ -19,9 +19,11 @@ GuessWho? is an application that identifies the faces of Korean idols and actors
 
 <div style="display: flex; justify-content: space-around;">
 
-![](docs/ss1.png)
+![Example 1](docs/ss1.png)
 
-![](docs/ss2.png)
+![Example 2](docs/ss2.png)
+
+![Example 3](docs/ss3.png)
 </div>
 
 ## Setup Instructions
@@ -47,6 +49,12 @@ cd guesswho
 
     ```bash
     cd guesswho
+    ```
+2. Create `.env` in 'svelte-frontend' folder and 'fastapi-backend'. By default, you can just copy `.env.example` file to `.env
+
+    ```bash
+    cp svelte-frontend/.env.example svelte-frontend/.env
+    cp fastapi-backend/.env.example fastapi-backend/.env
     ```
 
 3. Build and start the containers:
