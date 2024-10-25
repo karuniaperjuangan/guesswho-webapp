@@ -39,8 +39,8 @@ GuessWho? is an application that identifies the faces of Korean idols and actors
 ### Cloning the Repository
 
 ```bash
-git clone https://github.com/yourusername/guesswho.git
-cd guesswho
+git clone https://github.com/karuniaperjuangan/guesswho-webapp.git
+cd guesswho-webapp
 ```
 
 ### Running the Application
@@ -51,7 +51,7 @@ cd guesswho
 2. Navigate to the project directory:
 
     ```bash
-    cd guesswho
+    cd guesswho-webapp
     ```
 2. Create `.env` in 'svelte-frontend' folder and 'fastapi-backend'. By default, you can just copy `.env.example` file to `.env
 
