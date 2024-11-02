@@ -77,7 +77,7 @@
 
 <div class=" w-full text-center px-8 mx-auto">
   <h1 class="text-2xl font-bold mb-6">
-    Guess Who? : Identify Your Favorite Celebs
+    GuessWho? : Identify Your Favorite Celebs
   </h1>
 
   <p class=" text-justify mx-auto w-fit py-4">
