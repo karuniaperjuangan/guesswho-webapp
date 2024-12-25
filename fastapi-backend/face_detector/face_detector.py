@@ -24,7 +24,7 @@ NUM_DETECTION_FRAME_PER_SECOND = 1
 
 # prepare 'antelopev2' under ./models
 app = FaceAnalysis(name='buffalo_l', root='/insightface', providers=['CUDAExecutionProvider', 'CPUExecutionProvider'])
-app.prepare(ctx_id=0, det_size=(640, 640))
+app.prepare(ctx_id=0, det_size=(640, 640),det_thresh=0.2)
 
 def get_face_image(img: Image.Image, max_num: int = 0,task_id=None):
 
